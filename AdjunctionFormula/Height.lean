@@ -1,6 +1,7 @@
 -- import Mathlib.RingTheory.Ideal.basic
 import Mathlib.AlgebraicGeometry.PrimeSpectrum.Maximal
 import Mathlib.RingTheory.Ideal.MinimalPrime
+import Mathlib.Order.KrullDimension
 
 namespace Ideal
 
@@ -12,11 +13,11 @@ variable {R : Type _} [CommRing R]
 --this is actually in mathlib for preorders or something, but remember to take the
 --set of PRIME ideals, not the set of ideals
 
-noncomputable def height (I : Ideal R) : WithBot (WithTop ℕ) := ⨆ (p : I.minimalPrimes), sorry--p.height
+noncomputable def height (I : Ideal R) : WithBot (WithTop ℕ) := ⨆ (p ∈ I.minimalPrimes), sorry--(height p)
 -- sup of heights of primes containing this ideal
 
-lemma height_eq_prime_height (I : Ideal R) [IsPrime I] :
-height I = I.height := sorry
+-- lemma height_eq_prime_height (I : Ideal R) [IsPrime I] :
+-- height I = I.height := sorry
 
 --this is not already in mathlib
 
@@ -52,19 +53,16 @@ theorem dim_localized_at_p_eq_height_p (p : Ideal R) [IsPrime p] :
 (dim (Localization.AtPrime p)) = (height p) := sorry
 -- note bug in docs of line 67-68 of Mathlib/RingTheory/AtPrime.lean???, I vs P, R vs S
 
-variable (y : WithTop (WithBot ℕ))
+theorem dim_minus_1_of_quotient_element_non_minimal (x : R)
+(hx : ∀ p ∈ (⊥ : Ideal R).minimalPrimes, x ∉ p) :
+(dim (R ⧸ (Ideal.span {x}))) + 1 ≤ (dim R) := sorry
 
-#check (↑y) - (1 : WithTop (WithBot ℤ))
+-- Krull's Principal Ideal Theorem, aka the Hauptidealsatz
+theorem minimal_primes_height_1_of_principal (x : R) :
+∀ p ∈ (Ideal.span {x}).minimalPrimes, (height p) = 1 := sorry
 
-
--- theorem dim_minus_1_of_quotient_element_non_principal (x : R)
--- (hx : ∀ p ∈ (⊥ : Ideal R).minimalPrimes, x ∉ p) :
--- (dim (R ⧸ {x})) ≤ (↑(dim R) : WithBot (WithTop ℤ)) - (1 : WithBot (WithTop ℤ)) := sorry
-
--- the theorem about quotienting by an element in a non-minimal prime decreases height by
---   (at least) one
-
--- Krull's height theorem can go here (along with the prinicipal ideal theorem)
+-- Krull's Height theroem
+theorem minimal_primes_height_n_of_n_generators (xs : Finset R) :
+∀ p ∈ (Ideal.span xs.toSet).minimalPrimes, (height p) = xs.card := sorry
 
 end Dimension
---↥↑', '↥', '⇑
