@@ -13,7 +13,8 @@ variable {R : Type _} [CommRing R]
 --this is actually in mathlib for preorders or something, but remember to take the
 --set of PRIME ideals, not the set of ideals
 
-noncomputable def height (I : Ideal R) : WithBot (WithTop ℕ) := ⨆ (p ∈ I.minimalPrimes), sorry--(height p)
+noncomputable def height (I : Ideal R) : WithBot (WithTop ℕ) :=
+⨆ (p ∈ I.minimalPrimes), sorry--(height p)
 -- sup of heights of primes containing this ideal
 
 -- lemma height_eq_prime_height (I : Ideal R) [IsPrime I] :
@@ -26,7 +27,8 @@ end Ideal
 
 namespace Ring
 
-noncomputable def dim (R : Type _) [CommRing R] : WithBot (WithTop ℕ) := ⨆ (m : MaximalSpectrum R), (height m)
+noncomputable def dim (R : Type _) [CommRing R] : WithBot (WithTop ℕ) :=
+⨆ (m : MaximalSpectrum R), (Ideal.height m.asIdeal)
 -- sup of heights of all primes in R (i.e. the krull dim of the maximal spectrum)
 -- also in mathlib for preorders, I think
 
