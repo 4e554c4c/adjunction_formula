@@ -29,9 +29,10 @@ open Ideal
 
 variable (R : Type _) [CommRing R] [IsNoetherian R R]
 
--- lemma exist_subideals_of_all_heights_of_height_n (I : Ideal R) (hI : height I = n) :
--- ∃ seq : Array R, seq.size = n ∧ ∀ i ∈ {m : ℕ | m ≤ n},
--- (height (Ideal.span {seq[a] | a ≤ i})) = i := sorry
+lemma exist_subideals_of_all_heights_of_height_n
+(I : Ideal R) (n : ℕ) (hI : n = height I) :
+∃ f : Fin n → R, ∀ i : ℕ, i < n →
+(height (Ideal.span (f  '' {a | a ≤ i}))) = i := sorry
 
 end Dimension
 
