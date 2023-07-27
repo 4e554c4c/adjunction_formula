@@ -1,1 +1,12 @@
+import AdjunctionFormula.Annihilators
+import AdjunctionFormula.AssociatedPrimes
+import AdjunctionFormula.DimensionTheory
+import AdjunctionFormula.Height
 import AdjunctionFormula.Nakayama
+import AdjunctionFormula.Notation
+import AdjunctionFormula.PrimaryDecomposition
+import AdjunctionFormula.PrimeAvoidance
+import AdjunctionFormula.RegularLocalRing
+import AdjunctionFormula.RegularSequence
+import AdjunctionFormula.SupportOfModule
+import AdjunctionFormula.SystemOfParameters
