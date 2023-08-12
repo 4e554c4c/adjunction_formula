@@ -14,7 +14,7 @@ variable (I : Ideal R)
 
 @[reducible]
 protected noncomputable def height  [h : IsPrime I] : WithBot ℕ∞ :=
-  ⟨I, h⟩ |> height (PrimeSpectrum R)
+  height (PrimeSpectrum R) ⟨I, h⟩
 
 theorem minimalPrimes_isPrime {I p : Ideal R} (h : p ∈ I.minimalPrimes) : p.IsPrime := sorry
 
@@ -49,11 +49,13 @@ variable [IsNoetherianRing R]
 theorem minimal_primes_height_1_of_principal (x : R) :
     ∀ (h : p ∈ (Ideal.span {x}).minimalPrimes),
         haveI : IsPrime p := minimalPrimes_isPrime h
-        p.height = 1 := by
+        p.height ≤ 1 := by
   intros h
   haveI : IsPrime p := minimalPrimes_isPrime h
   rw [← dim_localized_at_p_eq_height_p p]
-  set Aₚ := Localization.AtPrime p
+  set Rₚ := Localization.AtPrime p with ←h
+  haveI : CommRing Rₚ := inferInstance
+  rw [h]
   sorry
 
 -- Krull's Height theroem
